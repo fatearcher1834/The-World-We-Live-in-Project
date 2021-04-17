@@ -255,8 +255,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c54e4db5c4d2804c9622279db46ae91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSpeed: 20
-  playerRotateSpeed: 0.28
+  playerSpeed: 5
+  playerRotateSpeed: 0.1
 --- !u!54 &607714100
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -444,7 +444,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.12619898, y: 0, z: 0, w: 0.992005}
-  m_LocalPosition: {x: 0, y: 7.5, z: -22}
+  m_LocalPosition: {x: 0, y: 7.5, z: -24}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -462,9 +462,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 507241505a327014e9d9d6c0dd23432b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 607714098}
-  cameraSpeed: 7
-  cameraOffest: {x: 0, y: 0.8, z: 0}
+  playerTarget: {fileID: 607714098}
+  cameraSpeedSmooth: 5
+  potionOffset: {x: 0, y: 1.2, z: 0}
+  distance: 24
+  x: 0
+  y: 0
+  xSpeed: 700
+  ySpeed: 200
+  maxRotationY: 25
+  minRotationY: -25
+  cameraPosition: {x: 0, y: 0, z: 0}
+  disSpeed: 800
+  maxDistance: 24
+  minDistance: 10
 --- !u!1 &981249673
 GameObject:
   m_ObjectHideFlags: 0
