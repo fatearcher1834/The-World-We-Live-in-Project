@@ -11,46 +11,34 @@ public class Movement : MonoBehaviour
 
     private Rigidbody rid;
     private Animator ant;
-     
-    //取得攝影機方向
-    private Transform mCamTra;
-    private Transform camDir;
-
-    //玩家操作UI設定
-    public GameObject playerBag;
-    public bool isOpen;
 
     void Start()
     {
         rid = GetComponent<Rigidbody>();
         ant = GetComponent<Animator>();
 
-        GetCameraDirectionObj();
+
     }
 
     //物理
     void FixedUpdate()
     {
-        GetCameraDirection();
         GroundMovement();
+
     }
-    private void GetCameraDirectionObj()
+    //投影攝影機前方向量到以transform.up為法向量之平面的向量
+    public Vector3 CamForwardOnPlane
     {
-        //取得攝影機位置
-        mCamTra = Camera.main.transform;
-        //產生物件，該物件方向與攝影機相同
-        GameObject cameraDirectionObject = new GameObject();
-        cameraDirectionObject.transform.parent = transform;
-        cameraDirectionObject.transform.localPosition = Vector3.zero;
-        cameraDirectionObject.name = "Direction";
-        camDir = cameraDirectionObject.transform;
-    }
-    private void GetCameraDirection()
-    {
-        //更新cameraDirection的旋轉角度>只取主攝影機的Y值
-        if (mCamTra)
+        get
         {
-            camDir.eulerAngles = new Vector3(0, mCamTra.eulerAngles.y, 0);
+            return Vector3.ProjectOnPlane( Camera.main.transform.forward, Vector3.up).normalized; 
+        }
+    }
+    public Vector3 CamRightOnPlane
+    {
+        get
+        {
+            return Vector3.ProjectOnPlane(Camera.main.transform.right, Vector3.up).normalized;
         }
     }
     private void GroundMovement()
@@ -58,11 +46,12 @@ public class Movement : MonoBehaviour
         //取得按鍵回傳值(1,0,-1)
         float horizontalMove = Input.GetAxisRaw("Horizontal");
         float verticalMove = Input.GetAxisRaw("Vertical");
-        //透過負值得到反向方位 moveVector.Y預設為0
+        //透過負值得到反向方位 moveVector.Y預設為0  
         moveVector = 
-            (camDir.right * horizontalMove + camDir.forward * verticalMove) * playerSpeed ; //攝影機方向的位置 * 速度
-        //將玩家速度設為moveVector
-        rid.velocity = moveVector;
+            (CamForwardOnPlane * verticalMove + CamRightOnPlane * horizontalMove) * playerSpeed;
+
+        rid.velocity = moveVector;  //將玩家速度設為moveVector
+
         //按下對應按鍵時，設定動畫和轉向
         if (horizontalMove != 0 || verticalMove !=0)
         {
@@ -75,27 +64,6 @@ public class Movement : MonoBehaviour
             ant.SetBool("Run", false);
         }
     }
-
-    void OpenPlayerBag()
-    {
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            isOpen = !isOpen;
-            playerBag.SetActive(isOpen);
-        }
-    }
-    public void ClosePlayerBag()
-    {
-        isOpen = false;
-    }
-
-    //即時功能
-    private void Update()
-    {
-        OpenPlayerBag();
-    }
-
-
 
 
 }
