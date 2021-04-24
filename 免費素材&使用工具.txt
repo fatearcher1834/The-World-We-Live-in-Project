@@ -1,0 +1,21 @@
+作品中有使用之免費素材與參考素材:
+
+－ UI －
+
+(1)icon:
+背包圖示
+https://icons8.com/icon/set/popular/nolan
+道具
+https://www.figma.com/community/file/817374743749588379
+
+(2)Font:
+裝甲明朝字體
+http://flopdesign.com/blog/font/5228/
+瀨戶字體
+http://nonty.net/font/freefont/setofont/
+
+
+
+－ Tool －
+
+(1)Figma: UI素材製作

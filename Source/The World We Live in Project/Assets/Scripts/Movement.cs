@@ -49,9 +49,8 @@ public class Movement : MonoBehaviour
         //透過負值得到反向方位 moveVector.Y預設為0  
         moveVector = 
             (CamForwardOnPlane * verticalMove + CamRightOnPlane * horizontalMove) * playerSpeed;
-
-        rid.velocity = moveVector;  //將玩家速度設為moveVector
-
+        //將玩家速度設為moveVector
+        rid.velocity = moveVector;  
         //按下對應按鍵時，設定動畫和轉向
         if (horizontalMove != 0 || verticalMove !=0)
         {

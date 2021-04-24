@@ -93,7 +93,7 @@ namespace UnityChan
 			if (Input.GetButtonDown ("Jump")) {	// スペースキーを入力したら
 
 				//アニメーションのステートがLocomotionの最中のみジャンプできる
-				if (currentBaseState.nameHash == locoState) {
+				if (currentBaseState.fullPathHash == locoState) {
 					//ステート遷移中でなかったらジャンプできる
 					if (!anim.IsInTransition (0)) {
 						rb.AddForce (Vector3.up * jumpPower, ForceMode.VelocityChange);
@@ -157,7 +157,7 @@ namespace UnityChan
 			}
 		// IDLE中の処理
 		// 現在のベースレイヤーがidleStateの時
-		else if (currentBaseState.nameHash == idleState) {
+		else if (currentBaseState.fullPathHash == idleState) {
 				//カーブでコライダ調整をしている時は、念のためにリセットする
 				if (useCurves) {
 					resetCollider ();
@@ -169,7 +169,7 @@ namespace UnityChan
 			}
 		// REST中の処理
 		// 現在のベースレイヤーがrestStateの時
-		else if (currentBaseState.nameHash == restState) {
+		else if (currentBaseState.fullPathHash == restState) {
 				//cameraObject.SendMessage("setCameraPositionFrontView");		// カメラを正面に切り替える
 				// ステートが遷移中でない場合、Rest bool値をリセットする（ループしないようにする）
 				if (!anim.IsInTransition (0)) {
